@@ -1,4 +1,9 @@
-import { capitalize, reverseString, Calculator } from './script.js';
+import {
+  capitalize,
+  reverseString,
+  Calculator,
+  caeserCipher,
+} from './script.js';
 
 describe('First character is capitalized', () => {
   test('in a word', () => {
@@ -81,5 +86,23 @@ describe('Check the correctness of multiplication in a calculator', () => {
 
   test('333 * 0 equals 0', () => {
     expect(Calculator.multiply(333, 0)).toEqual(0);
+  });
+});
+
+describe('Encrypt text with the caeser shift', () => {
+  test('ABC with key 3 is encrypted as DEF', () => {
+    expect(caeserCipher('ABC', 3)).toMatch('DEF');
+  });
+
+  test('HELLO WORLD with key -1 is encrypted as GDKKNZVNQKC', () => {
+    expect(caeserCipher('HELLO WORLD', -1)).toMatch('GDKKNZVNQKC');
+  });
+
+  test('CAESER with key 0 is encrypted as CAESER', () => {
+    expect(caeserCipher('CAESER', 0)).toMatch('CAESER');
+  });
+
+  test("Let's go! with key 5 is encrypted as QJY'XALT", () => {
+    expect(caeserCipher("Let's go!", 5)).toMatch("QJY'XALT");
   });
 });
