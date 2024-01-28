@@ -1,4 +1,4 @@
-export { capitalize, reverseString, Calculator };
+export { capitalize, reverseString, Calculator, caeserCipher};
 
 const capitalize = (str) => {
   const firstChar = str.charAt(0);
@@ -29,3 +29,59 @@ class Calculator {
     return num1 * num2;
   }
 }
+
+const caeserCipher = (text, key) => {
+  const string = text.toUpperCase();
+
+  if (key === 0) return string;
+
+  const alphabet = ' .,?!abcdefghijklmnopqrstuvwxyz'.toUpperCase();
+  const modified = modifyAlphabet(alphabet, key);
+  const shiftedText = shiftCharacters(string, alphabet, modified);
+  return shiftedText;
+};
+
+const modifyAlphabet = (alphabet, key) => {
+  const originalAlphabet = alphabet.split('');
+
+  let shiftedPart;
+  let shiftedArray;
+  if (key < 0) {
+    shiftedPart = originalAlphabet.splice(originalAlphabet.length + key);
+    shiftedArray = [...shiftedPart, ...originalAlphabet];
+  } else if (key > 0) {
+    shiftedPart = originalAlphabet.splice(0, key);
+    shiftedArray = [...originalAlphabet, ...shiftedPart];
+  }
+
+  return shiftedArray;
+};
+
+const shiftCharacters = (string, alphabet, modified) => {
+  const indexes = [];
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === "'") {
+      indexes.push(string[i]);
+      continue;
+    } else {
+      for (let j = 0; j < alphabet.length; j++) {
+        if (string[i] === alphabet[j]) {
+          indexes.push(j);
+          break;
+        }
+      }
+    }
+  }
+
+  let output = '';
+  indexes.forEach((index) => {
+    if (index === "'") {
+      output += index;
+    } else {
+      const shiftedChar = modified[index];
+      output += shiftedChar;
+    }
+  });
+
+  return output;
+};
