@@ -3,6 +3,7 @@ import {
   reverseString,
   Calculator,
   caeserCipher,
+  analyzeArray,
 } from './script.js';
 
 describe('First character is capitalized', () => {
@@ -27,11 +28,11 @@ describe('Character order is reversed', () => {
 
 describe('Check the correctness of addition in a calculator', () => {
   test('5 + 5 equals 10', () => {
-    expect(Calculator.add(5, 5)).toEqual(10);
+    expect(Calculator.add(5, 5)).toBe(10);
   });
 
   test('130 + 170 equals 300', () => {
-    expect(Calculator.add(130, 170)).toEqual(300);
+    expect(Calculator.add(130, 170)).toBe(300);
   });
 
   test('0.2 + 0.1 equals 0.3 (disregarding floating points)', () => {
@@ -39,53 +40,53 @@ describe('Check the correctness of addition in a calculator', () => {
   });
 
   test('"5" + 15 equals 20 (disregarding auto JS coercion)', () => {
-    expect(Calculator.add('5', 15)).toEqual(20);
+    expect(Calculator.add('5', 15)).toBe(20);
   });
 });
 
 describe('Check the correctness of subtraction in a calculator', () => {
   test('10 - 5 equals 5', () => {
-    expect(Calculator.subtract(10, 5)).toEqual(5);
+    expect(Calculator.subtract(10, 5)).toBe(5);
   });
 
   test('100 - 200 equals -100', () => {
-    expect(Calculator.subtract(100, 200)).toEqual(-100);
+    expect(Calculator.subtract(100, 200)).toBe(-100);
   });
 
   test('1 - 1 equals 0', () => {
-    expect(Calculator.subtract(1, 1)).toEqual(0);
+    expect(Calculator.subtract(1, 1)).toBe(0);
   });
 });
 
 describe('Check the correctness of division in a calculator', () => {
   test('20 / 5 equals 4', () => {
-    expect(Calculator.divide(20, 5)).toEqual(4);
+    expect(Calculator.divide(20, 5)).toBe(4);
   });
 
   test('1 / 1 equals 1', () => {
-    expect(Calculator.divide(1, 1)).toEqual(1);
+    expect(Calculator.divide(1, 1)).toBe(1);
   });
 
   test('10 / 100 equals 0.1', () => {
-    expect(Calculator.divide(10, 100)).toEqual(0.1);
+    expect(Calculator.divide(10, 100)).toBe(0.1);
   });
 
   test('5/0 equals cannot divide by 0', () => {
-    expect(Calculator.divide(5, 0)).toEqual('Cannot divide by 0');
+    expect(Calculator.divide(5, 0)).toBe('Cannot divide by 0');
   });
 });
 
 describe('Check the correctness of multiplication in a calculator', () => {
   test('5 * 5 equals 25', () => {
-    expect(Calculator.multiply(5, 5)).toEqual(25);
+    expect(Calculator.multiply(5, 5)).toBe(25);
   });
 
   test('10000 * 0.15 equals 1500', () => {
-    expect(Calculator.multiply(10000, 0.15)).toEqual(1500);
+    expect(Calculator.multiply(10000, 0.15)).toBe(1500);
   });
 
   test('333 * 0 equals 0', () => {
-    expect(Calculator.multiply(333, 0)).toEqual(0);
+    expect(Calculator.multiply(333, 0)).toBe(0);
   });
 });
 
@@ -104,5 +105,38 @@ describe('Encrypt text with the caeser shift', () => {
 
   test("Let's go! with key 5 is encrypted as QJY'XALT", () => {
     expect(caeserCipher("Let's go!", 5)).toMatch("QJY'XALT");
+  });
+});
+
+describe('Analyze the provided data in an array', () => {
+  test('Array [1,8,3,4,2,6] returns {average:4, min:1, max:8, length:6}', () => {
+    expect(analyzeArray([1, 8, 3, 4, 2, 6])).toEqual({
+      average: 4,
+      min: 1,
+      max: 8,
+      length: 6,
+    });
+  });
+
+  test('Array [0,-8,100,8,7,1,-33,8] returns {average:10.4, min:-33, max:100, length:8}', () => {
+    expect(analyzeArray([0, -8, 100, 8, 7, 1, -33, 8])).toEqual({
+      average: 10.4,
+      min: -33,
+      max: 100,
+      length: 8,
+    });
+  });
+
+  test('Array [1] returns {average:1, min:1, max:1, length:1}', () => {
+    expect(analyzeArray([1])).toEqual({
+      average: 1,
+      min: 1,
+      max: 1,
+      length: 1,
+    });
+  });
+
+  test('Array [] returns Null', () => {
+    expect(analyzeArray([])).toBeNull();
   });
 });
