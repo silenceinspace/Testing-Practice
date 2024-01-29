@@ -1,16 +1,19 @@
 export { capitalize, reverseString, caeserCipher, analyzeArray, Calculator };
 
+// 1)
 const capitalize = (str) => {
   const firstChar = str.charAt(0);
   const isCapitalized = firstChar.toUpperCase();
   return str.replace(firstChar, isCapitalized);
 };
 
+// 2)
 const reverseString = (str) => {
   const arrayOfChar = str.split('');
   return arrayOfChar.reverse().join('');
 };
 
+// 3)
 class Calculator {
   static add(num1, num2) {
     return Number(num1) + Number(num2);
@@ -30,6 +33,7 @@ class Calculator {
   }
 }
 
+// 4)
 const caeserCipher = (text, key) => {
   const string = text.toUpperCase();
 
@@ -86,6 +90,7 @@ const shiftCharacters = (string, alphabet, modified) => {
   return output;
 };
 
+// 5)
 const analyzeArray = (array) => {
   if (!array.length) return null;
 

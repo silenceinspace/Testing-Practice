@@ -6,6 +6,7 @@ import {
   analyzeArray,
 } from './script.js';
 
+// 1) Capitalize() function that takes a string and returns it with the first character capitalized.
 describe('First character is capitalized', () => {
   test('in a word', () => {
     expect(capitalize('hello')).toMatch(/^[A-Z]\w+$/);
@@ -16,6 +17,7 @@ describe('First character is capitalized', () => {
   });
 });
 
+// 2) ReverseString() function that takes a string and returns it reversed.
 describe('Character order is reversed', () => {
   test('in a word', () => {
     expect(reverseString('sleep')).toMatch('peels');
@@ -26,6 +28,7 @@ describe('Character order is reversed', () => {
   });
 });
 
+// 3) Calculator object that contains functions for the basic operations: add, subtract, divide, and multiply. Each of these functions should take two numbers and return the correct calculation.
 describe('Check the correctness of addition in a calculator', () => {
   test('5 + 5 equals 10', () => {
     expect(Calculator.add(5, 5)).toBe(10);
@@ -90,6 +93,7 @@ describe('Check the correctness of multiplication in a calculator', () => {
   });
 });
 
+// 4) CaesarCipher() function that takes a string and a shift factor and returns it with each character “shifted”.
 describe('Encrypt text with the caeser shift', () => {
   test('ABC with key 3 is encrypted as DEF', () => {
     expect(caeserCipher('ABC', 3)).toMatch('DEF');
@@ -108,6 +112,7 @@ describe('Encrypt text with the caeser shift', () => {
   });
 });
 
+// 5) AnalyzeArray() function that takes an array of numbers and returns an object with the following properties: average, min, max, and length.
 describe('Analyze the provided data in an array', () => {
   test('Array [1,8,3,4,2,6] returns {average:4, min:1, max:8, length:6}', () => {
     expect(analyzeArray([1, 8, 3, 4, 2, 6])).toEqual({
